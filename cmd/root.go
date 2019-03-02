@@ -9,7 +9,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"github.com/addictmud/mud/logger"
 	"github.com/addictmud/mud/natsqueue"
 )
 
@@ -26,7 +25,6 @@ var configList string
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	cobra.OnInitialize(logger.InitLogging)
 	cobra.OnInitialize(natsqueue.Run)
 	cobra.OnInitialize(cron.Run)
 
