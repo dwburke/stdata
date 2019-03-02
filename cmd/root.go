@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+    "github.com/dwburke/cron"
 	"github.com/dwburke/vipertools"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -26,7 +27,8 @@ var configList string
 func init() {
 	cobra.OnInitialize(initConfig)
 	cobra.OnInitialize(logger.InitLogging)
-	//cobra.OnInitialize(natsqueue.Run)
+	cobra.OnInitialize(natsqueue.Run)
+	cobra.OnInitialize(cron.Run)
 
 	rootCmd.PersistentFlags().StringVar(&configList, "config-list", "etc/*.yml", "config files location")
 

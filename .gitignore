@@ -1,0 +1,12 @@
+/stdata
+/stdata.yml
+/state
+/logs
+/*.log
+/goreleaser
+/dist
+/.github_token
+/nats-datastore
+/do-not-commit
+/vendor
+/etc
