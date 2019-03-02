@@ -3,6 +3,7 @@ package logging
 import (
 	"os"
 
+	"github.com/dwburke/atexit"
 	log "github.com/sirupsen/logrus"
 	"github.com/snowzach/rotatefilehook"
 	"github.com/spf13/viper"
@@ -51,6 +52,8 @@ func InitLogging() {
 	})
 
 	setupFileLogging()
+
+	atexit.Add(Cleanup)
 }
 
 func setupFileLogging() {
