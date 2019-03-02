@@ -24,11 +24,8 @@ var NatsInstance *NatsServer
 
 func Run() {
 	if !viper.GetBool("nats.server.enabled") {
-		log.Println("nats.server.enabled == false; not starting")
 		return
 	}
-
-	log.Println("nats.server.enabled == true; starting")
 
 	NatsInstance = &NatsServer{}
 
