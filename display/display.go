@@ -59,15 +59,21 @@ func Run() {
 		}
 
 		args := map[string]interface{}{
-			"timestamp": time.Now().Format("Mon Jan 2 15:04:05 MST 2006"),
+			//"timestamp": time.Now().Format("Mon Jan 2 15:04:05 MST 2006"),
 		}
 
-		if err := t2.Execute(os.Stdout, args); err != nil {
+		f, err := os.Create("/tmp/display.out")
+		if err != nil {
 			panic(err)
 		}
 
-		select {
+		if err := t2.Execute(f, args); err != nil {
+			panic(err)
+		}
 
+		f.Close()
+
+		select {
 		case <-stop:
 			fmt.Println("Stop requested")
 			return
