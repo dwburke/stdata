@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-    "github.com/dwburke/cron"
+	"github.com/dwburke/cron"
 	"github.com/dwburke/vipertools"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
