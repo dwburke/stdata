@@ -1,7 +1,7 @@
 {{- .timestamp }}
 ================
-Front   : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }}
-Garage  : 
-Sun Room: 
-Patio   : 
-Office  : 
+Front   : {{ DoorLock "smartthings/Front Door Lock/lock" }} {{ DoorState "smartthings/Front Door Sensor/contact" }}
+Garage  : {{ DoorLock "smartthings/Inner Garage Door Lock/lock" }} {{ DoorState "smartthings/Garage House Door Sensor/contact" }}
+Sun Room: - {{ DoorState "smartthings/Sun Room Sensor/contact" }}
+Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }}
+Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }}
