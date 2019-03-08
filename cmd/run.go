@@ -23,6 +23,7 @@ var runCmd = &cobra.Command{
 		go stmqtt.Listen("smartthings/#", func(client mqtt.Client, msg mqtt.Message) {
 			log.Printf("- [%s] %s\n", msg.Topic(), string(msg.Payload()))
 			db.LevelDBSet("topic:"+msg.Topic(), string(msg.Payload()))
+			display.Refresh()
 		})
 
 		go display.Run()
