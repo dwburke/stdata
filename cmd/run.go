@@ -5,6 +5,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
+	"github.com/dwburke/stdata/db"
+	"github.com/dwburke/stdata/display"
 	stmqtt "github.com/dwburke/stdata/mqtt"
 )
 
@@ -18,11 +20,12 @@ var runCmd = &cobra.Command{
 	Long:  "run",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		//client mqtt.Client, msg mqtt.Message
-
-		stmqtt.Listen("smartthings/#", func(client mqtt.Client, msg mqtt.Message) {
+		go stmqtt.Listen("smartthings/#", func(client mqtt.Client, msg mqtt.Message) {
 			log.Printf("- [%s] %s\n", msg.Topic(), string(msg.Payload()))
+			db.LevelDBSet("topic:"+msg.Topic(), string(msg.Payload()))
 		})
+
+		go display.Run()
 
 		done := make(chan bool)
 		<-done
