@@ -1,7 +1,7 @@
 package display
 
 import (
-	//"fmt"
+	"fmt"
 	"os"
 	"text/template"
 	"time"
@@ -11,11 +11,18 @@ import (
 	"github.com/dwburke/stdata/db"
 )
 
+var stop chan bool
+var refresh chan bool
+
 func init() {
 	//viper.SetDefault("client.mqtt.url", "mqtt://localhost:<port>/<topic>");
 }
 
 func Run() {
+
+	stop = make(chan bool)
+	refresh = make(chan bool)
+
 	for {
 
 		t := template.New("display.tmpl").Funcs(template.FuncMap{
@@ -24,10 +31,24 @@ func Run() {
 			},
 			"DoorLock": func(key string) string {
 				value := db.LevelDBGet("topic:" + key)
+				if value == "locked" {
+					return "L"
+				} else if value == "unlocked" {
+					return "U"
+				} else if value == "" {
+					return "?"
+				}
 				return value
 			},
 			"DoorState": func(key string) string {
 				value := db.LevelDBGet("topic:" + key)
+				if value == "open" {
+					return "O"
+				} else if value == "closed" {
+					return "C"
+				} else if value == "" {
+					return "?"
+				}
 				return value
 			},
 		})
@@ -37,31 +58,34 @@ func Run() {
 			panic(err)
 		}
 
-		//t2.Execute(w, "Hello World!") //step 2
-
 		args := map[string]interface{}{
 			"timestamp": time.Now().Format("Mon Jan 2 15:04:05 MST 2006"),
-			//"timestamp": time.Now().Format("20060102150405"),
-			//"Agent": agent,
 		}
 
 		if err := t2.Execute(os.Stdout, args); err != nil {
 			panic(err)
 		}
 
-		//fmt.Println(time.Now().Format("20060102150405"))
-		//fmt.Println("================\n")
-		//fmt.Print(  "Front   : ")
-		//fmt.Print(  "Garage  : ")
-		//fmt.Print(  "Sun Room: ")
-		//fmt.Print(  "Patio   : ")
-		//fmt.Print(  "Office  : ")
-
 		select {
-		case <-time.After(1 * time.Second):
-			//case <-stop:
-			//return
+
+		case <-stop:
+			fmt.Println("Stop requested")
+			return
+
+		case <-refresh:
+			// forced refresh
+
+		case <-time.After(10 * time.Second):
+			//timeout refresh
 		}
 	}
 
+}
+
+func Stop() {
+	stop <- true
+}
+
+func Refresh() {
+	refresh <- true
 }
