@@ -1,8 +1,11 @@
 package cmd
 
 import (
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	stmqtt "github.com/dwburke/stdata/mqtt"
 )
 
 func init() {
@@ -11,20 +14,17 @@ func init() {
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "main entry point for running all of the enabled services",
-	Long:  "main entry point for running all of the enabled services",
+	Short: "run",
+	Long:  "run",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		var started_something bool
+		//client mqtt.Client, msg mqtt.Message
 
-		// go something.Run()
-		// started_something = true
+		stmqtt.Listen("smartthings/#", func(client mqtt.Client, msg mqtt.Message) {
+			log.Printf("- [%s] %s\n", msg.Topic(), string(msg.Payload()))
+		})
 
-		if started_something {
-			done := make(chan bool)
-			<-done
-		} else {
-			log.Println("Nothing started... exiting")
-		}
+		done := make(chan bool)
+		<-done
 	},
 }
