@@ -31,10 +31,10 @@ func Run() {
 			},
 			"DoorLock": func(key string) string {
 				value := db.LevelDBGet("topic:" + key)
-				if value == "locked" {
-					return "L"
-				} else if value == "unlocked" {
-					return "U"
+				if value == "unlocked" {
+					return "\033[0;31mU\033[0m"
+				} else if value == "locked" {
+					return "\033[0;32mL\033[0m"
 				} else if value == "" {
 					return "?"
 				}
@@ -43,13 +43,27 @@ func Run() {
 			"DoorState": func(key string) string {
 				value := db.LevelDBGet("topic:" + key)
 				if value == "open" {
-					return "O"
+					return "\033[0;31mO\033[0m"
 				} else if value == "closed" {
-					return "C"
+					return "\033[0;32mC\033[0m"
 				} else if value == "" {
 					return "?"
 				}
 				return value
+			},
+			"Light": func(key string) string {
+				value := db.LevelDBGet("topic:" + key)
+				if value == "on" {
+					return "\033[0;107m*\033[0m"
+				} else if value == "off" {
+					return "-"
+				} else if value == "" {
+					return "?"
+				}
+				return value
+			},
+			"GetInt": func(key string) string {
+				return db.LevelDBGet("topic:" + key)
 			},
 		})
 

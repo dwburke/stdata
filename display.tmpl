@@ -1,6 +1,17 @@
-================
-Front   : {{ DoorLock "smartthings/Front Door Lock/lock" }} {{ DoorState "smartthings/Front Door Sensor/contact" }}
-Garage  : {{ DoorLock "smartthings/Inner Garage Door Lock/lock" }} {{ DoorState "smartthings/Garage House Door Sensor/contact" }}
-Sun Room: - {{ DoorState "smartthings/Sun Room Sensor/contact" }}
-Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }}
-Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }}
+==============+=============
+ Doors        | Lights      
+Front   : {{ DoorLock "smartthings/Front Door Lock/lock" }} {{ DoorState "smartthings/Front Door Sensor/contact" }} | 
+Garage  : {{ DoorLock "smartthings/Inner Garage Door Lock/lock" }} {{ DoorState "smartthings/Garage House Door Sensor/contact" }} |
+Sun Room: - {{ DoorState "smartthings/Sun Room Sensor/contact" }} | Family  : {{ Light "smartthings/Family Room Lights/switch" }}
+Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }} | Bathroom: {{ Light "smartthings/Master Bathroom Vanity Lights/switch" }}
+Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }} | Office  : {{ Light "smartthings/Office Light Switch/switch" }}
+==============+=============
+ Temperatures
+Front Door        : {{ GetInt "smartthings/Front Door Sensor/temperature" }}
+Garage Entry Door : {{ GetInt "smartthings/Garage House Door Sensor/temperature" }}
+Office Door       : {{ GetInt "smartthings/Office Door Sensor/temperature" }}
+Nook Patio Door   : {{ GetInt "smartthings/Patio Door Sensor/temperature" }}
+Sun Room Door     : {{ GetInt "smartthings/Sun Room Sensor/temperature" }}
+Under Dishwasher  : {{ GetInt "smartthings/Water Leak Sensor A/temperature" }}
+Under Kitchen Sink: {{ GetInt "smartthings/Water Leak Sensor B/temperature" }}
+Unused Leak Sensor: {{ GetInt "smartthings/Water Leak Sensor C/temperature" }}
