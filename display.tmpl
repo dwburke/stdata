@@ -7,11 +7,27 @@ Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }} | Bathroom: 
 Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }} | Office  : {{ Light "smartthings/Office Light Switch/switch" }}
 ==============+=============
  Temperatures
-Front Door        : {{ GetInt "smartthings/Front Door Sensor/temperature" }}
-Garage Entry Door : {{ GetInt "smartthings/Garage House Door Sensor/temperature" }}
-Office Door       : {{ GetInt "smartthings/Office Door Sensor/temperature" }}
-Nook Patio Door   : {{ GetInt "smartthings/Patio Door Sensor/temperature" }}
-Sun Room Door     : {{ GetInt "smartthings/Sun Room Sensor/temperature" }}
-Under Dishwasher  : {{ GetInt "smartthings/Water Leak Sensor A/temperature" }}
-Under Kitchen Sink: {{ GetInt "smartthings/Water Leak Sensor B/temperature" }}
-Unused Leak Sensor: {{ GetInt "smartthings/Water Leak Sensor C/temperature" }}
+Front Door        : [0m
+{{- with $x := GetInt "smartthings/Front Door Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Front Door Sensor/temperature" -}} [0m
+Garage Entry Door : [0m
+{{- with $x := GetInt "smartthings/Garage House Door Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Garage House Door Sensor/temperature" -}} [0m
+Office Door       : [0m
+{{- with $x := GetInt "smartthings/Office Door Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Office Door Sensor/temperature" -}} [0m
+Nook Patio Door   : [0m
+{{- with $x := GetInt "smartthings/Patio Door Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Patio Door Sensor/temperature" -}} [0m
+Sun Room Door     : [0m
+{{- with $x := GetInt "smartthings/Sun Room Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Sun Room Sensor/temperature" -}} [0m
+Under Dishwasher  : [0m
+{{- with $x := GetInt "smartthings/Water Leak Sensor A/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Water Leak Sensor A/temperature" -}} [0m
+Under Kitchen Sink: [0m
+{{- with $x := GetInt "smartthings/Water Leak Sensor B/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Water Leak Sensor B/temperature" -}} [0m
+Unused Leak Sensor: [0m
+{{- with $x := GetInt "smartthings/Water Leak Sensor C/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
+{{- GetInt "smartthings/Water Leak Sensor C/temperature" -}} [0m
