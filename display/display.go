@@ -6,6 +6,7 @@ import (
 	"text/template"
 	"time"
 
+	"github.com/spf13/cast"
 	"github.com/spf13/viper"
 
 	"github.com/dwburke/stdata/db"
@@ -62,8 +63,8 @@ func Run() {
 				}
 				return value
 			},
-			"GetInt": func(key string) string {
-				return db.LevelDBGet("topic:" + key)
+			"GetInt": func(key string) int {
+				return cast.ToInt(db.LevelDBGet("topic:" + key))
 			},
 		})
 
