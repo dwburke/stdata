@@ -1,11 +1,11 @@
-==============+=============
- Doors        | Lights      
-Front   : {{ DoorLock "smartthings/Front Door Lock/lock" }} {{ DoorState "smartthings/Front Door Sensor/contact" }} | 
-Garage  : {{ DoorLock "smartthings/Inner Garage Door Lock/lock" }} {{ DoorState "smartthings/Garage House Door Sensor/contact" }} |
-Sun Room: - {{ DoorState "smartthings/Sun Room Sensor/contact" }} | Family  : {{ Light "smartthings/Family Room Lights/switch" }}
-Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }} | Bathroom: {{ Light "smartthings/Master Bathroom Vanity Lights/switch" }}
-Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }} | Office  : {{ Light "smartthings/Office Light Switch/switch" }}
-==============+=============
+──────────────┬────────────────────────────────────
+«Doors»       │«Lights»
+Front   : {{ DoorLock "smartthings/Front Door Lock/lock" }} {{ DoorState "smartthings/Front Door Sensor/contact" }} │ 
+Garage  : {{ DoorLock "smartthings/Inner Garage Door Lock/lock" }} {{ DoorState "smartthings/Garage House Door Sensor/contact" }} │
+Sun Room: - {{ DoorState "smartthings/Sun Room Sensor/contact" }} │ Family  : {{ Light "smartthings/Family Room Lights/switch" }}
+Patio   : - {{ DoorState "smartthings/Patio Door Sensor/contact" }} │ Bathroom: {{ Light "smartthings/Master Bathroom Vanity Lights/switch" }}
+Office  : {{ DoorLock "smartthings/Office Lock/lock" }} {{ DoorState "smartthings/Office Door Sensor/contact" }} │ Office  : {{ Light "smartthings/Office Light Switch/switch" }}
+──────────────┴────────────────────────────────────
  Temperatures
 Front Door        : [0m
 {{- with $x := GetInt "smartthings/Front Door Sensor/temperature" -}} {{- if lt $x 69 -}} [0;104m {{- else if gt $x 73 -}} [0;31m {{- end -}} {{- end -}}
